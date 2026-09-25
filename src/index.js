@@ -34,3 +34,5 @@ export { buildFrames } from './frames.js';
 export { parseCommits } from './parseLog.js';
 export { emitFrames } from './emit.js';
 export { emitViewer } from './emitViewer.js';
+export { createStaticServer, startServer, resolveRequestPath } from './serve.js';
+export { openBrowser } from './openBrowser.js';
