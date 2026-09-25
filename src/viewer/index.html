@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>git timeline</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="viewer.css">
+</head>
+<body>
+<header>
+  <h1>git timeline &mdash; <span id="file-name"></span></h1>
+</header>
+<main>
+  <div id="caption" class="caption">loading&hellip;</div>
+  <div id="lines" class="lines"></div>
+</main>
+<footer>
+  <input type="range" id="scrub" min="0" max="0" value="0" aria-label="scrub through commit history">
+  <span id="frame-position"></span>
+</footer>
+<script type="module" src="viewer.js"></script>
+</body>
+</html>

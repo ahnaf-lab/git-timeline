@@ -4,11 +4,12 @@ A `git timeline` plugin that turns a file's git history into an offline,
 scrubbable view of its blame: drag a slider and every line's authorship and
 age repaint frame by frame, like scrubbing a video.
 
-This milestone emits that frame model as static JSON: one file per frame plus
+Frame generation emits that history as static JSON: one file per frame plus
 a manifest, each line tagged with the author and how many days old it is as
-of that frame. A future milestone serves this data over Node's built-in
-`http` module as a local, offline web view — no external server or network
-access.
+of that frame. This milestone adds the scrub-bar viewer itself — a static
+HTML/CSS/JS page that reads that JSON and lets you drag a slider through the
+file's history. A future milestone serves it over Node's built-in `http`
+module as a local, offline web view — no external server or network access.
 
 ## Install
 
@@ -73,14 +74,31 @@ data/
 This is the shape a static web view can step through frame by frame as a
 scrub bar moves, without parsing every frame's lines up front.
 
+`--out` also writes the scrub-bar viewer itself into the same directory:
+`index.html`, `viewer.css`, `viewer.js` and `render.js`. Opening `index.html`
+through a static file server shows the file with a range-input scrub bar;
+dragging it fetches and repaints each frame, coloring every line by how many
+days old it is (blue = just changed, orange = old) and showing the full
+attribution on hover. It cannot be opened directly as a `file://` URL because
+browsers block `fetch()` of local files under that scheme — serving this
+directory is the job of the next milestone. Until then, any static file
+server works, for example:
+
+```sh
+node bin/git-timeline.js path/to/file --out data/
+python3 -m http.server --directory data
+```
+
 ### Library
 
 ```js
 import { buildTimeline } from './src/index.js';
 import { emitFrames } from './src/emit.js';
+import { emitViewer } from './src/emitViewer.js';
 
 const timeline = buildTimeline(process.cwd(), 'path/to/file');
 const manifest = emitFrames(timeline, 'data/');
+emitViewer('data/');
 ```
 
 ### Known limitations (this milestone)
@@ -89,6 +107,10 @@ const manifest = emitFrames(timeline, 'data/');
   most recent rename of the given path, matching plain `git log` behavior.
 - Binary files are detected and skipped (frames mark `binary: true`) rather
   than diffed line by line.
+- The viewer has no server of its own yet, so it needs an external static
+  file server for now (see above); a future milestone adds `git timeline
+  serve` using Node's built-in `http` module, with no external server or
+  network access needed.
 
 ## Status
 

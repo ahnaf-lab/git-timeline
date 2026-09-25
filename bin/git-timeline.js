@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import process from 'node:process';
-import { buildTimeline, emitFrames } from '../src/index.js';
+import { buildTimeline, emitFrames, emitViewer } from '../src/index.js';
 
 function parseArgs(argv) {
   const args = { file: undefined, out: undefined };
@@ -26,6 +26,7 @@ try {
   const timeline = buildTimeline(process.cwd(), fileArg);
   if (outDir) {
     const manifest = emitFrames(timeline, outDir);
+    emitViewer(outDir);
     process.stdout.write(`${JSON.stringify(manifest, null, 2)}\n`);
   } else {
     process.stdout.write(`${JSON.stringify(timeline, null, 2)}\n`);
