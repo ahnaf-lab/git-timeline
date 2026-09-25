@@ -1,0 +1,42 @@
+{
+  "file": "sample.txt",
+  "frameCount": 3,
+  "frames": [
+    {
+      "file": "frame-000000.json",
+      "commit": {
+        "hash": "1bd1e74bd6f22b5efb8ba15492648f82fe56f5bc",
+        "author": "Golden",
+        "email": "golden@example.com",
+        "date": "2024-01-01T00:00:00Z",
+        "subject": "add sample file"
+      },
+      "binary": false,
+      "lineCount": 3
+    },
+    {
+      "file": "frame-000001.json",
+      "commit": {
+        "hash": "86bc80896898b6d6905eb0ddb5958a2f2f6b3f0d",
+        "author": "Golden",
+        "email": "golden@example.com",
+        "date": "2024-01-02T00:00:00Z",
+        "subject": "rewrite beta and append delta"
+      },
+      "binary": false,
+      "lineCount": 4
+    },
+    {
+      "file": "frame-000002.json",
+      "commit": {
+        "hash": "46dcc74d0590cc81758b3904fc4bb720fed8a928",
+        "author": "Golden",
+        "email": "golden@example.com",
+        "date": "2024-02-01T00:00:00Z",
+        "subject": "drop gamma"
+      },
+      "binary": false,
+      "lineCount": 3
+    }
+  ]
+}

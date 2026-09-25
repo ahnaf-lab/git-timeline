@@ -32,3 +32,4 @@ export function buildTimeline(repoDir, filePath) {
 
 export { buildFrames } from './frames.js';
 export { parseCommits } from './parseLog.js';
+export { emitFrames } from './emit.js';

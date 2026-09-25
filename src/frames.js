@@ -37,10 +37,21 @@ function makeLine(text, meta) {
   return { text, commit: meta.hash, author: meta.author, date: meta.date };
 }
 
+// Whole days between two ISO-8601 date strings. Used to tag each line with
+// its age as of a given frame: how long ago (relative to that frame's own
+// commit date) the line was last touched. Floor, not round, so a line
+// touched by the frame's own commit is always age 0.
+function ageInDays(lineDate, frameDate) {
+  const from = Date.parse(lineDate);
+  const to = Date.parse(frameDate);
+  return Math.floor((to - from) / 86_400_000);
+}
+
 /**
  * Walk an ordered (oldest-first) list of parsed commits and produce one
  * blame frame per commit: a full snapshot of the file's lines, each tagged
- * with the commit that last authored it.
+ * with the commit that last authored it and its age (in days) as of that
+ * frame's commit date.
  */
 export function buildFrames(commits) {
   let lines = [];
@@ -59,7 +70,10 @@ export function buildFrames(commits) {
         subject: commit.subject,
       },
       binary: commit.binary,
-      lines: lines.map((line) => ({ ...line })),
+      lines: lines.map((line) => ({
+        ...line,
+        age: ageInDays(line.date, commit.date),
+      })),
     });
   }
 

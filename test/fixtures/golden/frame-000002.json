@@ -1,0 +1,33 @@
+{
+  "commit": {
+    "hash": "46dcc74d0590cc81758b3904fc4bb720fed8a928",
+    "author": "Golden",
+    "email": "golden@example.com",
+    "date": "2024-02-01T00:00:00Z",
+    "subject": "drop gamma"
+  },
+  "binary": false,
+  "lines": [
+    {
+      "text": "alpha",
+      "commit": "1bd1e74bd6f22b5efb8ba15492648f82fe56f5bc",
+      "author": "Golden",
+      "date": "2024-01-01T00:00:00Z",
+      "age": 31
+    },
+    {
+      "text": "BETA",
+      "commit": "86bc80896898b6d6905eb0ddb5958a2f2f6b3f0d",
+      "author": "Golden",
+      "date": "2024-01-02T00:00:00Z",
+      "age": 30
+    },
+    {
+      "text": "delta",
+      "commit": "86bc80896898b6d6905eb0ddb5958a2f2f6b3f0d",
+      "author": "Golden",
+      "date": "2024-01-02T00:00:00Z",
+      "age": 30
+    }
+  ]
+}
